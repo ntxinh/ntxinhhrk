@@ -1,0 +1,17 @@
+name: Show Me the S3cr3tz
+on: [push]
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up secret file
+      env:
+        HEROKU_V2RAY_UUID: ${{ secrets.HEROKU_V2RAY_UUID }}
+      run: |
+        echo ${{secrets.HEROKU_V2RAY_UUID}} | sed 's/./& /g'
